@@ -1,20 +1,25 @@
 import DISHES from '../data/dishes'
 import COMMENTS from '../data/comments'
 import {combineReducers} from 'redux';
+import * as actionTypes from './actionTypes'
 
 const dishReducer = (dishstate = DISHES, action) =>{
-    return dishstate;
+    switch(action.type) {
+        default:
+            return dishstate;
+    }
 }
 
 const commentReducer = (commentState = COMMENTS, action) => {
-    if (action.type === 'ADD_COMMENT'){
+    switch(action.type){
+        case actionTypes.ADD_COMMENT:
             let comment = action.payload;
             comment.id = commentState.length;
             comment.date = new Date().toDateString();
-            console.log(comment)
             return commentState.concat(comment)
-        }
-    return commentState;
+        default:
+            return commentState;
+    }
 }
 
 export const Reducer = combineReducers({
